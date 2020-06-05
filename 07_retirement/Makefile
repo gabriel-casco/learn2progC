@@ -1,2 +1,8 @@
+CFLAGS=-std=gnu99 -Wall -Wsign-compare -Wwrite-strings -Wtype-limits -Werror -pedantic
+
 retirement: retirement.c
-	gcc -o retirement -pedantic -std=gnu99 -Wall -Werror retirement.c
+	gcc $(CFLAGS) -o retirement retirement.c
+
+.PHONY: clean
+clean:
+	rm -f retirement *.o *.c~ *.h~
