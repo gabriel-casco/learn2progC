@@ -1,7 +1,8 @@
-Grading at Fri Jun  5 18:06:36 UTC 2020
+Grading at Fri Jun  5 18:10:01 UTC 2020
 Attempting to compile test.c
-The code did not compile
+gcc -std=gnu99 -Wall -Wsign-compare -Wwrite-strings -Wtype-limits -Werror -pedantic -o test test.c
+compiled
 Your file matched the expected output
 Your output matched what we expected
 
-Overall Grade: FAILED
+Overall Grade: PASSED
