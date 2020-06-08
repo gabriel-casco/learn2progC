@@ -3,7 +3,24 @@
 #include <string.h>
 
 void reverse(char * str) {
-  //WRITE ME!
+  /*
+   * Thisfunction reverses the string passed to it.
+   * This function doesn't return anything.
+   * Modifies the string passed into it in place.
+   */
+  if( str != NULL ){
+    int len = strlen(str);
+    if (len != 0){
+      char str1[len];
+      strcpy(str1, str);
+      for(int i = 0; i < len; i++) {
+	str[i] = str1[len-i-1];
+      }
+    }
+    else{
+      str = "";
+    }
+  }  
 }
 
 int main(void) {
