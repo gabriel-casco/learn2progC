@@ -8,16 +8,21 @@ void reverse(char * str) {
    * This function doesn't return anything.
    * Modifies the string passed into it in place.
    */
+
+  // Check for NULL argument
   if( str != NULL ){
-    int len = strlen(str);
+    //length of string
+    size_t len = strlen(str);
     if (len != 0){
-      char str1[len];
-      strcpy(str1, str);
-      for(int i = 0; i < len; i++) {
-	str[i] = str1[len-i-1];
+      char str_copy[len];
+      // Copy string from str to str_copy
+      strcpy(str_copy, str);
+      for(size_t i = 0; i < len; i++) {
+	str[i] = str_copy[len-i-1];
       }
     }
     else{
+      // empty string
       str = "";
     }
   }  
