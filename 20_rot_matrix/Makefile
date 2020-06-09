@@ -10,4 +10,3 @@ rotate.o: rotate.c
 .PHONY: clean
 clean:
 	rm -f rotate-matrix *.c~ Makefile~ rotate.o
-
