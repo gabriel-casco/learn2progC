@@ -1,6 +1,6 @@
-Grading at Wed Jun 10 07:20:55 UTC 2020
+Grading at Wed Jun 10 07:31:50 UTC 2020
 Attempting to compile breaker.c 
-gcc -o breaker -Wall -Werror -pedantic -std=gnu99 -Wsign-compare -Wwrite-strings -Wtype-limits -fsanitize=address breaker.c
+make: 'breaker' is up to date.
 testcase1 passed
 #################################################
 testcase2:
