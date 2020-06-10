@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <assert.h>
 
+
 int card_ptr_comp(const void * vp1, const void * vp2) {
   const card_t * const * cp1 = vp1;
   const card_t * const * cp2 = vp2;
@@ -56,9 +57,10 @@ size_t get_match_index(unsigned * match_counts, size_t n,unsigned n_of_akind){
   for(i=0; i< n; i++){
     if(match_counts[i]==n_of_akind){ return i;}
   }
+  // printf(" ERROR there is no n_of_kind in match_count\n");
+
   return 0;
 }
-
 ssize_t  find_secondary_pair(deck_t * hand,
 			     unsigned * match_counts,
 			     size_t match_idx) {
@@ -76,6 +78,7 @@ ssize_t  find_secondary_pair(deck_t * hand,
       return i;
     }
   }
+
   return -1;
 }
 
@@ -282,15 +285,44 @@ int compare_hands(deck_t * hand1, deck_t * hand2) {
   return 0;
 }
 
-//You will write this function in Course 4.
-//For now, we leave a prototype (and provide our
-//implementation in eval-c4.o) so that the
-//other functions we have provided can make
-//use of get_match_counts.
-unsigned * get_match_counts(deck_t * hand) ;
 
-// We provide the below functions.  You do NOT need to modify them
-// In fact, you should not modify them!
+
+//this function
+//   allocates an array of unsigned ints with as
+//      many elements as there are cards in the hand.
+//      It then fills in this array with
+//      the "match counts" of the corresponding cards.
+//For example,
+//   given
+//        Ks Kh Qs Qh 0s 9d 9c 9h
+//      This function would return
+//        2  2  2  2  1  3  3  3
+//   because there are 2 kings, 2 queens,
+//  1 ten, and 3 nines.
+unsigned * get_match_counts(deck_t * hand){
+  unsigned *match = malloc((hand->n_cards)*sizeof(*match));
+  for(int p=0; p<hand->n_cards; p++){
+    match[p]=1;
+  }
+  int count=1;
+  size_t index=0;
+  while(index<hand->n_cards - 1){
+    int i=index;
+    while(hand->cards[i]->value == hand->cards[i+1]->value){
+      count++;
+      i++;
+      if(i + 1>=hand->n_cards){
+	break;
+      }
+    }
+    for(int k=index; k<(index + count); k++){
+      match[k] = count;
+    }
+    index +=count;
+    count = 1;
+  }
+  return match;
+}
 
 
 //This function copies a straight starting at index "ind" from deck "from".
@@ -343,6 +375,7 @@ int find_straight(deck_t * hand, suit_t fs, hand_eval_t * ans) {
 	copy_straight(ans->cards, hand, cpind, fs,4) ;
       }
       else {
+
 	copy_straight(ans->cards, hand, i, fs,5);
       }
       return 1;
